@@ -9,7 +9,7 @@
 ## Overview
 * Technical:
 
-        Python, HTML, CSS, JS
+        Python, Django, HTML, CSS, JS
         Database: SQLite
 
 
