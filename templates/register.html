@@ -1,0 +1,58 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="breadcrumb-area pt-95 pb-95 bg-img" style="background-image:url(/assets/img/banner/banner-2.jpg);">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Login / Register</h2>
+            <ul>
+                <li><a href="{% url 'index' %}">home</a></li>
+                <li class="active">Login / Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="login-register-area pt-50 pb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a data-toggle="tab" href="{% url 'login' %}">
+                            <h4> login </h4>
+                        </a>
+                        <a class="active" data-toggle="tab" href="{% url 'register' %}">
+                            <h4> register </h4>
+                        </a>
+                    </div>
+                    <div class="tab-content">
+                        <div id="lg1" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    <form action="#" method="post">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <button type="submit" class="btn btn-primary">Register</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+        
+        
+		
+		
+		
+		
+		
+		
+   
+

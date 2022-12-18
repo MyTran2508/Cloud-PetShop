@@ -1,0 +1,106 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+{% if user.username %}
+<div class="breadcrumb-area pt-95 pb-95 bg-img" style="background-image:url(/assets/img/banner/banner-2.jpg);">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Login / Register</h2>
+            <ul>
+                <li><a href="{% url 'index' %}">home</a></li>
+                <li class="active">Login / Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="login-register-area pt-50 pb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a class="active" data-toggle="tab" href="{% url 'login' %}">
+                            <h4> login </h4>
+                        </a>
+                        <a data-toggle="tab" href="{% url 'register' %}">
+                            <h4> register </h4>
+                        </a>
+                    </div>
+                    <div class="tab-content">
+                        <div id="lg1" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    <p>
+                                        <td colspan="3">Tài khoản:</td>
+                                        <td colspan="1">{{user.username}}</td>
+                                    </p>
+                                    <p>
+                                        <td colspan="3">Email:</td>
+                                        <td colspan="1">{{user.email}}</td></p>
+                                    <p></p>
+                                    <p><a href="{% url 'logout' %}"><button>Đăng xuất</button></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="breadcrumb-area pt-95 pb-95 bg-img" style="background-image:url(/assets/img/banner/banner-2.jpg);">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Login / Register</h2>
+            <ul>
+                <li><a href="{% url 'index' %}">home</a></li>
+                <li class="active">Login / Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="login-register-area pt-50 pb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a class="active" data-toggle="tab" href="{% url 'login' %}">
+                            <h4> login </h4>
+                        </a>
+                        <a data-toggle="tab" href="{% url 'register' %}">
+                            <h4> register </h4>
+                        </a>
+                    </div>
+                    <div class="tab-content">
+                        <div id="lg1" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    <form action="#" method="post">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <button type="submit" class="btn btn-primary">Log in</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+        
+        
+		
+		
+		
+		
+		
+		
+   
+

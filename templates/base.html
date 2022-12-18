@@ -1,0 +1,302 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}Pet Food Shop {% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png">
+		
+		<!-- all css here -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/css/animate.css">
+        <link rel="stylesheet" href="/assets/css/simple-line-icons.css">
+        <link rel="stylesheet" href="/assets/css/themify-icons.css">
+        <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="/assets/css/slick.css">
+        <link rel="stylesheet" href="/assets/css/meanmenu.min.css">
+        <link rel="stylesheet" href="/assets/css/responsive.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        
+
+        <script type="text/javascript">
+            var user = '{{request.user}}'
+    
+            function getToken(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getToken('csrftoken')
+    
+            function getCookie(name) {
+                // Split cookie string and get all individual name=value pairs in an array
+                var cookieArr = document.cookie.split(";");
+    
+                // Loop through the array elements
+                for(var i = 0; i < cookieArr.length; i++) {
+                    var cookiePair = cookieArr[i].split("=");
+    
+                    /* Removing whitespace at the beginning of the cookie name
+                    and compare it with the given string */
+                    if(name == cookiePair[0].trim()) {
+                        // Decode the cookie value and return
+                        return decodeURIComponent(cookiePair[1]);
+                    }
+                }
+    
+                // Return null if not found
+                return null;
+            }
+            var cart = JSON.parse(getCookie('cart'))
+    
+            if (cart == undefined){
+                cart = {}
+                console.log('Cart Created!', cart)
+                document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            }
+            console.log('Cart:', cart)
+        
+        </script>
+        
+    </head>
+
+    <body>
+
+        <header class="header-area">
+            <div class="header-top theme-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-10">
+                            <div class="welcome-area">
+                                {% if user.username %}
+                                
+                                    <p>Welcome to our shop, {{user.username}}!</p>
+                                    
+                                {% else %}
+                                    
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-lg-8 col-md-8 col-12">
+                            <div class="account-curr-lang-wrap f-right">
+                                <ul>
+                                    <li class="top-hover"><a href="#">$Doller (US)</a></li>
+                                    <li><a href="#"><img alt="flag" src="/assets/img/icon-img/en.jpg">English </a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom transparent-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6">
+                            <div class="logo pt-3">
+                                <a href="{% url 'index' %}"><img alt="" src="/assets/img/logo/pet-logo.jpg"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-5 d-none d-lg-block">
+                            <div class="main-menu text-center">
+                                <nav>
+                                    <ul>
+                                        <li><a href="{% url 'index' %}">HOME</a></li>
+                                        <li class="mega-menu-position"><a href="{% url 'shop-page' %}">Food</a>
+                                            <ul class="mega-menu">
+                                                <li>
+                                                    <ul>
+                                                        <li class="mega-menu-title">Dogs Food</li>
+                                                        <li><a href="{% url 'shop-page' %}">Eggs</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Carrots</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Salmon fishs</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Peanut Butter</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Grapes & Raisins</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="mega-menu-title">Cats Food</li>
+                                                        <li><a href="{% url 'shop-page' %}">Meat</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Fish</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Eggs</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Veggies</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Cheese</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="mega-menu-title">Fishs Food</li>
+                                                        <li><a href="{% url 'shop-page' %}">Rice</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Veggies</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Cheese</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">wheat bran</a></li>
+                                                        <li><a href="{% url 'shop-page' %}">Cultivation</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li><a href="{% url 'shop-page' %}"><img alt="" src="/assets/img/banner/menu-img-4.webp"></a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">PAGES</a>
+                                            <ul class="submenu">
+                                                <li>
+                                                    <a href="{% url 'shop-page' %}">shop page</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'shop-list' %}">shop list</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'cart' %}">cart page</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'checkout' %}">checkout</a>
+                                                </li>                                                                                                                                        
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'about' %}">ABOUT</a></li>
+                                        <li><a href="{% url 'contact' %}">CONTACT US</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-8 col-sm-8 col-7">
+                            <div class="search-login-cart-wrapper">
+                                
+                                <div class="header-login same-style">
+                                    <a href="{% url 'login' %}"><i class="icon-user icons"></i></a>
+                                </div>
+                                
+                                <div class="header-cart same-style">                                   
+                                    <button class="icon-cart">
+                                        <a href={% url 'cart' %}><i class="icon-handbag"></i></a>
+                                        <span class="count-style">{{ cartItems }}</span>
+                                    </button>                                                                      
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+         		
+		
+
+        {% block content %}{% endblock %}
+
+
+        <footer class="footer-area">
+            <div class="footer-top pt-30 pb-10 gray-bg-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                            <div class="footer-widget mb-30">
+                                <div class="footer-info-wrapper">
+                                    <div class="footer-logo">
+                                        <a href="#">
+                                            <img src="/assets/img/logo/pet-logo.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, co adipisi elit, sed eiusmod tempor incididunt ut labore et dolore</p>
+                                    <div class="social-icon">
+                                        <ul>
+                                            <li><a href="#"><i class="icon-social-twitter"></i></a></li>
+                                            <li><a href="#"><i class="icon-social-instagram"></i></a></li>
+                                            <li><a href="#"><i class="icon-social-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="icon-social-skype"></i></a></li>
+                                            <li><a href="#"><i class="icon-social-dribbble"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                            <div class="footer-widget mb-30 pl-50">
+                                <h4 class="footer-title">USEFUL LINKS</h4>
+                                <div class="footer-content">
+                                    <ul>
+                                        <li><a href="#">Help & Contact Us</a></li>
+                                        <li><a href="#">Returns & Refunds</a></li>
+                                        <li><a href="#">Online Stores</a></li>
+                                        <li><a href="#">Terms & Conditions</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-2 col-md-6 col-sm-6">
+                            <div class="footer-widget mb-30 pl-70">
+                                <h4 class="footer-title">HELP</h4>
+                                <div class="footer-content">
+                                    <ul>
+                                        <li><a href="#">Faq's </a></li>
+                                        <li><a href="#">Pricing Plans</a></li>
+                                        <li><a href="#">Order Traking</a></li>
+                                        <li><a href="#">Returns </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer-widget">
+                                <div class="payment-img">
+                                    <a href="index.html">
+                                        <img src="/assets/img/icon-img/payment.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom gray-bg-3 pt-17 pb-15">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="copyright text-center">
+                                <p>Copyright © <a href="#">Marten.</a> All Right Reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+       <!-- all js here -->
+       <script type="text/javascript" src="/assets/js/popper.js"></script>
+       <script type="text/javascript" src="/assets/js/jquery.counterup.min.js"></script>
+       <script type="text/javascript" src="/assets/js/waypoints.min.js"></script>
+       <script type="text/javascript" src="/assets/js/elevetezoom.js"></script>
+       <script type="text/javascript" src="/assets/js/ajax-mail.js"></script>
+       <script type="text/javascript" src="/assets/js/owl.carousel.min.js"></script>
+       <script type="text/javascript" src="/assets/js/plugins.js"></script>
+       <script type="text/javascript" src="/assets/js/main.js"></script> 
+       <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	   <script type="text/javascript" src="/assets/js/cart.js"></script>
+       <script type="text/javascript" src="/assets/js/ship.js"></script>
+
+    </body>
+</html>

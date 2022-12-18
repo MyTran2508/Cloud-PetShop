@@ -1,0 +1,86 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %} 
+
+
+
+
+<div class="breadcrumb-area pt-95 pb-110 bg-img" style="background-image:url(/assets/img/banner/banner-2.jpg);">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Cart Page</h2>
+            <ul>
+                <li><a href="{% url 'index' %}">home</a></li>
+                <li class="active">Cart Page</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="cart-main-area pt-50 pb-50">
+    <div class="container">
+        <h3 class="page-title">Your cart items</h3>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>&emsp;&emsp;&emsp;&emsp;&emsp;Image</th>
+                                    <th>Product Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>   
+                            <tbody>
+                                {% for item in items %}                                
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <a href="#"><img src="{{ item.product.picture.url }}"  alt=""></a>
+                                    </td>
+                                    <td class="product-name"><a href="#">{{ item.product.name }}</a></td>
+                                    <td class="product-price-cart"><span class="amount">&emsp;${{ item.product.price }}</span></td>
+                                    <td class="product-quantity">   
+                                        <a>&emsp;&emsp;&emsp;&emsp;</a>
+                                        <img data-product="{{item.product.id}}" data-action="remove" class="update-cart" src="/assets/img_2/arrow-left.png">         
+                                        <a href="#">{{ item.quantity }}</a>                                                                                                                                                                                   
+                                        <img data-product="{{item.product.id}}" data-action="add" class="update-cart" src="/assets/img_2/arrow-right.png">                                                                         
+                                    </td>
+                                    <td class="product-subtotal" id="subtotal">&emsp;${{ item.get_total }}</td>
+                                </tr>                                          
+                                {% endfor %}                                                          
+                            </tbody>                         
+                        </table>
+                    </div>                   
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="cart-shiping-update-wrapper">
+                                <div class="cart-shiping-update">
+                                    <a href="{% url 'shop-list' %}">Continue Shopping</a>                                   
+                                </div>
+                                <div class="cart-clear">
+                                    <a href="{% url 'cart-delete' %}">Clear Shopping Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form> 
+                <div class="row">
+                    <div class="col-lg-4 col-md-6"></div>
+                    <div class="col-lg-4 col-md-6"></div>                                        
+                    <div class="col-lg-4 col-md-12">
+                        <div class="grand-totall">
+                            <h5>Grand Total: ${{order.get_cart_total|floatformat:2}}</h5>
+                            <a href="{% url 'checkout' %}">Proceed To Checkout</a>
+                            <p>Checkout with Multiple Addresses</p>
+                        </div>
+                    </div>
+                </div>                 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
